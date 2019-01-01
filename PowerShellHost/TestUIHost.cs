@@ -41,6 +41,12 @@ namespace PowerShellHostTest
 		{
 		}
 
+		public bool UseConsole {
+			get { return Server == null; }
+		}
+
+		internal PowerShellServer Server { get; set; }
+
 		public override PSHostRawUserInterface RawUI => rawUI;
 
 		public override Dictionary<string, PSObject> Prompt (string caption, string message, Collection<FieldDescription> descriptions)
@@ -80,22 +86,38 @@ namespace PowerShellHostTest
 
 		public override void Write (string value)
 		{
-			Console.Write (value);
+			if (UseConsole) {
+				Console.Write (value);
+			} else {
+				Server.Log (value);
+			}
 		}
 
 		public override void WriteDebugLine (string message)
 		{
-			Console.WriteLine ("DEBUG: {0}", message);
+			if (UseConsole) {
+				Console.WriteLine ("DEBUG: {0}", message);
+			} else {
+				Server.Log (message);
+			}
 		}
 
 		public override void WriteErrorLine (string value)
 		{
-			Console.WriteLine ("ERROR: {0}", value);
+			if (UseConsole) {
+				Console.WriteLine ("ERROR: {0}", value);
+			} else {
+				Server.Log (value);
+			}
 		}
 
 		public override void WriteLine (string value)
 		{
-			Console.WriteLine (value);
+			if (UseConsole) {
+				Console.WriteLine (value);
+			} else {
+				Server.Log (value);
+			}
 		}
 
 		public override void WriteProgress (long sourceId, ProgressRecord record)
@@ -104,12 +126,20 @@ namespace PowerShellHostTest
 
 		public override void WriteVerboseLine (string message)
 		{
-			Console.WriteLine ("VERBOSE: {0}", message);
+			if (UseConsole) {
+				Console.WriteLine ("VERBOSE: {0}", message);
+			} else {
+				Server.Log (message);
+			}
 		}
 
 		public override void WriteWarningLine (string message)
 		{
-			Console.WriteLine ("WARNING: {0}", message);
+			if (UseConsole) {
+				Console.WriteLine ("WARNING: {0}", message);
+			} else {
+				Server.Log (message);
+			}
 		}
 	}
 }

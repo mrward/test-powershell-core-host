@@ -1,10 +1,10 @@
 ﻿//
-// TestHost.cs
+// PowerShellServer.cs
 //
 // Author:
 //       Matt Ward <matt.ward@microsoft.com>
 //
-// Copyright (c) 2018 Microsoft
+// Copyright (c) 2019 Microsoft
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,53 +24,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using System;
-using System.Globalization;
-using System.Management.Automation.Host;
-using System.Threading;
-
 namespace PowerShellHostTest
 {
-	public class TestHost : PSHost
+	static class Methods
 	{
-		TestUIHost ui = new TestUIHost ();
-
-		CultureInfo currentUICulture = Thread.CurrentThread.CurrentUICulture;
-		CultureInfo currentCulture = Thread.CurrentThread.CurrentCulture;
-		Guid instanceId = Guid.NewGuid ();
-
-		public override CultureInfo CurrentCulture => currentCulture;
-
-		public override CultureInfo CurrentUICulture => currentUICulture;
-
-		public override Guid InstanceId => instanceId;
-
-		public override string Name => "Package Manager Host";
-
-		public override PSHostUserInterface UI => ui;
-
-		public override Version Version => new Version (1, 0);
-
-		public override void EnterNestedPrompt ()
-		{
-			throw new NotImplementedException ();
-		}
-
-		public override void ExitNestedPrompt ()
-		{
-			throw new NotImplementedException ();
-		}
-
-		public override void NotifyBeginApplication ()
-		{
-		}
-
-		public override void NotifyEndApplication ()
-		{
-		}
-
-		public override void SetShouldExit (int exitCode)
-		{
-		}
+		public const string LogMessage = "test/Log";
+		public const string Invoke = "test/Invoke";
 	}
 }

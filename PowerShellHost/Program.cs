@@ -33,15 +33,29 @@ namespace PowerShellHostTest
 {
 	class Program
 	{
+		static PowerShellServer server;
 		static Dte dte = new Dte ();
 
 		static int Main (string[] args)
 		{
 			try {
-				return RunInteractive ();
+				RunJsonRpc ();
+				return 0;
 			} catch (Exception ex) {
-				Console.WriteLine (ex);
+				Logger.Log ("Error: {0}", ex);
 				return -1;
+			}
+		}
+
+		static void RunJsonRpc ()
+		{
+			Logger.Clear ();
+			try {
+				server = new PowerShellServer (Console.OpenStandardOutput (), Console.OpenStandardInput ());
+				server.Run ();
+			} catch (Exception ex) {
+				Logger.Log ("PowerShellServer error: {0}", ex.Message);
+				throw;
 			}
 		}
 
@@ -55,6 +69,10 @@ namespace PowerShellHostTest
 			while (true) {
 				Console.Write ("PS> ");
 				string line = Console.ReadLine ();
+
+				if (line == "exit")
+					break;
+
 				using (var pipeline = CreatePipeline (runspace, line)) {
 					pipeline.Invoke ();
 				}
