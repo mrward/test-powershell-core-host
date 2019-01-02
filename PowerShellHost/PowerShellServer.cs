@@ -48,7 +48,7 @@ namespace PowerShellHostTest
 			host = new TestHost ();
 			host.Server = this;
 
-			var initialSessionState = CreateInitialSessionState ();
+			var initialSessionState = CreateInitialSessionState (dte);
 			runspace = RunspaceFactory.CreateRunspace (host, initialSessionState);
 			runspace.Open ();
 
@@ -81,21 +81,21 @@ namespace PowerShellHostTest
 			}
 		}
 
-		InitialSessionState CreateInitialSessionState ()
+		public static InitialSessionState CreateInitialSessionState (Dte dte)
 		{
 			var initialSessionState = InitialSessionState.CreateDefault ();
-			SessionStateVariableEntry variable = CreateDTESessionVariable ();
+			SessionStateVariableEntry variable = CreateDTESessionVariable (dte);
 			initialSessionState.Variables.Add (variable);
 			return initialSessionState;
 		}
 
-		SessionStateVariableEntry CreateDTESessionVariable ()
+		static SessionStateVariableEntry CreateDTESessionVariable (Dte dte)
 		{
 			var options = ScopedItemOptions.AllScope | ScopedItemOptions.Constant;
 			return new SessionStateVariableEntry ("DTE", dte, "SharpDevelop DTE object", options);
 		}
 
-		static Pipeline CreatePipeline (Runspace runspace, string command)
+		public static Pipeline CreatePipeline (Runspace runspace, string command)
 		{
 			Pipeline pipeline = runspace.CreatePipeline ();
 			pipeline.Commands.AddScript (command, false);
