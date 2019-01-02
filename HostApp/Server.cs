@@ -25,8 +25,8 @@
 // THE SOFTWARE.
 
 using System;
+using Messages;
 using Newtonsoft.Json.Linq;
-using PowerShellHostTest;
 using StreamJsonRpc;
 
 namespace HostApp
@@ -34,13 +34,57 @@ namespace HostApp
 	public class Server
 	{
 		[JsonRpcMethod (Methods.LogMessage)]
-		public void OnLogMessage (string message)
+		public void OnLogMessage (JToken arg)
 		{
 			try {
-				Console.WriteLine (message);
+				var logMessage = arg.ToObject<LogMessage> ();
+				switch (logMessage.Level) {
+					case LogLevel.Error:
+						WriteError (logMessage.Message);
+						break;
+					case LogLevel.Warning:
+						WriteWarning (logMessage.Message);
+						break;
+					case LogLevel.Verbose:
+						WriteVerbose (logMessage.Message);
+						break;
+					case LogLevel.Debug:
+						WriteDebug (logMessage.Message);
+						break;
+					default:
+						Console.WriteLine (logMessage.Message);
+						break;
+				}
 			} catch (Exception ex) {
 				Console.WriteLine ("OnLogMessage error: {0}", ex);
 			}
+		}
+
+		void WriteError (string message)
+		{
+			WriteLine ("91", message);
+		}
+
+		void WriteWarning (string message)
+		{
+			WriteLine ("93", message);
+		}
+
+		void WriteDebug (string message)
+		{
+			WriteLine ("94", message);
+		}
+
+		void WriteVerbose (string message)
+		{
+			WriteLine ("96", message);
+		}
+
+		void WriteLine (string code, string message)
+		{
+			Console.Write ("\x1B[{0}m", code);
+			Console.Write (message);
+			Console.WriteLine ("\x1B[0m");
 		}
 	}
 }

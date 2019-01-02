@@ -10,4 +10,7 @@
     <PackageReference Include="Microsoft.PowerShell.SDK" Version="6.0.4" />
     <PackageReference Include="StreamJsonRpc" Version="1.4.134" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Messages\Messages.csproj" />
+  </ItemGroup>
 </Project>

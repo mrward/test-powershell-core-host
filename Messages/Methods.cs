@@ -1,5 +1,5 @@
 ﻿//
-// PowerShellServer.cs
+// Methods.cs
 //
 // Author:
 //       Matt Ward <matt.ward@microsoft.com>
@@ -24,9 +24,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-namespace PowerShellHostTest
+namespace Messages
 {
-	static class Methods
+	public static class Methods
 	{
 		public const string LogMessage = "test/Log";
 		public const string Invoke = "test/Invoke";

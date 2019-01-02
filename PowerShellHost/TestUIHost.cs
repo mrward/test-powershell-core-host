@@ -30,6 +30,7 @@ using System.Collections.ObjectModel;
 using System.Management.Automation;
 using System.Management.Automation.Host;
 using System.Security;
+using Messages;
 
 namespace PowerShellHostTest
 {
@@ -89,7 +90,7 @@ namespace PowerShellHostTest
 			if (UseConsole) {
 				Console.Write (value);
 			} else {
-				Server.Log (value);
+				Server.Log (LogLevel.Info, value);
 			}
 		}
 
@@ -98,7 +99,7 @@ namespace PowerShellHostTest
 			if (UseConsole) {
 				Console.WriteLine ("DEBUG: {0}", message);
 			} else {
-				Server.Log (message);
+				Server.Log (LogLevel.Debug, message);
 			}
 		}
 
@@ -107,7 +108,7 @@ namespace PowerShellHostTest
 			if (UseConsole) {
 				Console.WriteLine ("ERROR: {0}", value);
 			} else {
-				Server.Log (value);
+				Server.Log (LogLevel.Error, value);
 			}
 		}
 
@@ -116,7 +117,7 @@ namespace PowerShellHostTest
 			if (UseConsole) {
 				Console.WriteLine (value);
 			} else {
-				Server.Log (value);
+				Server.Log (LogLevel.Info, value);
 			}
 		}
 
@@ -129,7 +130,7 @@ namespace PowerShellHostTest
 			if (UseConsole) {
 				Console.WriteLine ("VERBOSE: {0}", message);
 			} else {
-				Server.Log (message);
+				Server.Log (LogLevel.Verbose, message);
 			}
 		}
 
@@ -138,7 +139,7 @@ namespace PowerShellHostTest
 			if (UseConsole) {
 				Console.WriteLine ("WARNING: {0}", message);
 			} else {
-				Server.Log (message);
+				Server.Log (LogLevel.Warning, message);
 			}
 		}
 	}

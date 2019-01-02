@@ -27,8 +27,8 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using Messages;
 using Newtonsoft.Json;
-using PowerShellHostTest;
 using StreamJsonRpc;
 
 namespace HostApp

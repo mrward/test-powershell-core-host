@@ -29,7 +29,7 @@ using System.IO;
 using System.Management.Automation;
 using System.Management.Automation.Runspaces;
 using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
+using Messages;
 using StreamJsonRpc;
 
 namespace PowerShellHostTest
@@ -104,9 +104,13 @@ namespace PowerShellHostTest
 			return pipeline;
 		}
 
-		public void Log (string value)
+		public void Log (LogLevel level, string message)
 		{
-			var task = rpc.NotifyAsync (Methods.LogMessage, value);
+			var logMessage = new LogMessage {
+				Level = level,
+				Message = message
+			};
+			var task = rpc.NotifyWithParameterObjectAsync (Methods.LogMessage, logMessage);
 			Ignore (task);
 		}
 

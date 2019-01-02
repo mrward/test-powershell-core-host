@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerShellHostTest", "Power
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HostApp", "HostApp\HostApp.csproj", "{5027CBFE-ABDC-404E-B344-9F9C83DACCA5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messages", "Messages\Messages.csproj", "{E01A5055-5AAB-430D-B5F9-B45D1C17840F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,5 +21,9 @@ Global
 		{5027CBFE-ABDC-404E-B344-9F9C83DACCA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5027CBFE-ABDC-404E-B344-9F9C83DACCA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5027CBFE-ABDC-404E-B344-9F9C83DACCA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E01A5055-5AAB-430D-B5F9-B45D1C17840F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E01A5055-5AAB-430D-B5F9-B45D1C17840F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E01A5055-5AAB-430D-B5F9-B45D1C17840F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E01A5055-5AAB-430D-B5F9-B45D1C17840F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
