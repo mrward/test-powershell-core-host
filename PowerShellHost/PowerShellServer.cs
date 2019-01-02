@@ -72,7 +72,6 @@ namespace PowerShellHostTest
 		{
 			Logger.Log ("PowerShellServer.Invoke: {0}", line);
 			try {
-				//string line = "get-alias";
 				using (var pipeline = CreatePipeline (runspace, line)) {
 					pipeline.Invoke ();
 				}
@@ -99,7 +98,8 @@ namespace PowerShellHostTest
 		{
 			Pipeline pipeline = runspace.CreatePipeline ();
 			pipeline.Commands.AddScript (command, false);
-			pipeline.Commands.Add ("out-default");
+			//pipeline.Commands.Add ("out-default");
+			pipeline.Commands.Add ("out-host"); // Ensures native command output goes through the HostUI.
 			pipeline.Commands[0].MergeMyResults (PipelineResultTypes.Error, PipelineResultTypes.Output);
 			return pipeline;
 		}
